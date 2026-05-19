@@ -90,7 +90,7 @@ FROM
     depressed_users;
 
 
------------Find users whose screen time is above the overall average.
+-----------Find users whose screen time is above the overall average-------------
 
 SELECT
     age,
@@ -110,7 +110,52 @@ GROUP BY
     gender
 
 
--- Calculate average physical activity by platform.
--- Find whether students with sleep below 6 hours have higher average stress.
--- Create a summary table showing platform, user count, average screen time, 
---  average sleep, average stress, and average academic performance.
+-----------------Calculate average physical activity by platform-----------------
+
+SELECT
+    platform_usage,
+    ROUND(AVG(physical_activity)::numeric,2) AS avg_physical_activity
+FROM
+    social_med
+GROUP BY
+    platform_usage;
+
+
+
+------Find whether students with sleep below 6 hours have higher average stress------------
+
+SELECT
+    CASE 
+        WHEN sleep_hours < 6 THEN 'Below 6 hours'
+        ELSE '6 hours or more'
+    END AS sleep_category,
+    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level
+FROM
+    social_med  
+GROUP BY
+    sleep_category;
+
+
+--------Create a summary table showing platform, user count, average screen time------
+
+SELECT
+    platform_usage,
+    COUNT(*) AS user_count,
+    ROUND(AVG(screen_time)::numeric,2) AS avg_screen_time
+FROM
+    social_med  
+GROUP BY
+    platform_usage
+ORDER BY
+    avg_screen_time DESC; 
+    
+
+
+--------average sleep, average stress, and average academic performance------------
+
+SELECT
+    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
+    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
+    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
+FROM
+    social_med;
