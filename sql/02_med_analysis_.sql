@@ -90,12 +90,13 @@ FROM
     depressed_users;
 
 
------------Find users whose screen time is above the overall average-------------
+-----------users whose screen time is above the overall average-------------
 
 SELECT
     age,
     gender,
-    count(*) AS user_count
+    screen_time
+    -- ROUND(AVG(screen_time):: numeric,2) AS avg_screen_time
 FROM
     social_med
 WHERE
@@ -105,9 +106,34 @@ WHERE
                     FROM
                         social_med
                   )
-GROUP BY
+-- GROUP BY
+--     age,
+--     gender
+ORDER BY 
+    age ASC
+
+------------------user with higher screen time that that of avg screen time within the group of same age
+
+with agee as (
+SELECT
     age,
-    gender
+    gender,
+    screen_time,
+    ROUND(AVG(screen_time) OVER (PARTITION BY age)::numeric,2) AS avg_screen_time
+FROM
+    social_med)
+
+SELECT
+    -- *
+    age,
+    count (*) as total_user
+FROM
+    agee
+WHERE
+    screen_time > avg_screen_time
+GROUP BY
+    age
+
 
 
 -----------------Calculate average physical activity by platform-----------------
@@ -159,3 +185,11 @@ SELECT
     ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
 FROM
     social_med;
+
+
+
+
+SELECT
+    CASE
+        SUM(WHEN gender = 'male' THEN 1 ELSE 0 END) AS male_count,
+        SUM(WHEN gender = 'female')

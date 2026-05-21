@@ -1,10 +1,10 @@
--- Count the total number of records in the dataset.
+------------Count the total number of records in the dataset--------------
 SELECT 
     COUNT(*) AS total_records
 FROM 
     social_med;
 
--- Find the number of male and female participants.
+----------Find the number of male and female participants------------
 
 SELECT 
     gender,
@@ -14,7 +14,7 @@ FROM
 GROUP BY 
     gender;
 
--- Show the minimum, maximum, and average age.
+--------------Show the minimum, maximum, and average age-----------
 
 SELECT 
     MIN(age) AS min_age,
@@ -22,7 +22,7 @@ SELECT
     ROUND(AVG(age) ,0) AS avg_age
 FROM social_med;
 
--- Count users by platform_usage.
+------Count users by platform_usage-----------------
 
 SELECT 
     platform_usage,
@@ -32,7 +32,7 @@ FROM
 GROUP BY 
     platform_usage;
 
--- Find the average screen_time for each platform.
+----------------Find the average screen_time for each platform------------
 
 SELECT 
     platform, 
@@ -42,7 +42,7 @@ FROM
 GROUP BY 
     platform;
 
--- Find the average sleep_hours by gender.
+-----------Find the average sleep_hours by gender-----------------
 
 SELECT
     gender,
@@ -53,7 +53,7 @@ FROM
 GROUP BY
     gender;
 
--- Count users by social_interaction_level.
+----------------Count users by social_interaction_level----------
 
 SELECT 
     social_interaction_level,
@@ -63,16 +63,16 @@ FROM
 GROUP BY 
     social_interaction_level;
 
--- Find how many users are marked with depression_label = 1.
+-----Find how many users are marked with depression_label = 1-----------
 
 SELECT 
     COUNT(*) AS depressed_users_lvl=1
 FROM 
     social_med
 WHERE 
-    depression_label >= 1;
+    depression_label = 1;
 
--- Show the top 10 users with the highest screen_time.
+------Show the top 10 users with the highest screen_time-----------
 
 SELECT
     age,
@@ -85,7 +85,7 @@ ORDER BY
     avg_screen_time DESC
 LIMIT 10;
 
--- Find the average academic performance of all students.
+-------------Find the average academic performance of all students-----------------
 
 SELECT
     age,
