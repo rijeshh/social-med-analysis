@@ -196,3 +196,41 @@ SELECT
     END
 FROM
     social_med;
+--------average sleep, average stress, and average academic performance------------
+
+SELECT
+    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
+    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
+    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
+FROM
+    social_med;
+
+
+
+
+SELECT
+    CASE
+        SUM(WHEN gender = 'Male' THEN 1 ELSE 0 END) AS male_count,
+        SUM(WHEN gender = 'Female' THEN 1 ELSE 0 END) AS female_count
+    END
+FROM
+    social_med;
+--------average sleep, average stress, and average academic performance------------
+
+SELECT
+    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
+    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
+    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
+FROM
+    social_med;
+
+
+
+
+SELECT
+    CASE
+        SUM(WHEN gender = 'Male' THEN 1 ELSE 0 END) AS male_count,
+        SUM(WHEN gender = 'Female' THEN 1 ELSE 0 END) AS female_count
+    END
+FROM
+    social_med;
