@@ -1,4 +1,7 @@
-DROP TABLE IF EXISTS social_med;
+DROP TABLE IF EXISTS social_med; -- if any table with same name exists, drop it first
+
+
+-- table creation
 
 CREATE TABLE social_med (
     age INT,
