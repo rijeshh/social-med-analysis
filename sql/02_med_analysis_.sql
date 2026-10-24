@@ -191,5 +191,8 @@ FROM
 
 SELECT
     CASE
-        SUM(WHEN gender = 'male' THEN 1 ELSE 0 END) AS male_count,
-        SUM(WHEN gender = 'female')
+        SUM(WHEN gender = 'Male' THEN 1 ELSE 0 END) AS male_count,
+        SUM(WHEN gender = 'Female' THEN 1 ELSE 0 END) AS female_count
+    END
+FROM
+    social_med;
