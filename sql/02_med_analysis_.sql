@@ -196,22 +196,14 @@ SELECT
     END
 FROM
     social_med;
---------average sleep, average stress, and average academic performance------------
+ /*Step 5: Blocked Account — Sperrkonto
 
-SELECT
-    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
-    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
-    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
-FROM
-    social_med;
+What is Sperrkonto?
+Germany wants to make sure you won’t run out of money mid-study. So they require you to lock a fixed amount in a special bank account before granting your visa.
 
+How it works:
 
-
-
-SELECT
-    CASE
-        SUM(WHEN gender = 'Male' THEN 1 ELSE 0 END) AS male_count,
-        SUM(WHEN gender = 'Female' THEN 1 ELSE 0 END) AS female_count
-    END
-FROM
-    social_med;
+You deposit €11,904 (~NPR 17–18 lakhs) into this account
+The money is locked — you can’t touch it freely
+Once in Germany, you can withdraw only €992 per month
+The money is still yours — Germany doesn’t take it--*/
