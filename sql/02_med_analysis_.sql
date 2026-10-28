@@ -175,6 +175,19 @@ GROUP BY
 ORDER BY
     avg_screen_time DESC; 
     
+--------Create a summary table showing platform, user count, average screen time------
+
+SELECT
+    platform_usage,
+    COUNT(*) AS user_count,
+    ROUND(AVG(screen_time)::numeric,2) AS avg_screen_time
+FROM
+    social_med  
+GROUP BY
+    platform_usage
+ORDER BY
+    avg_screen_time DESC; 
+    
 
 
 --------average sleep, average stress, and average academic performance------------
@@ -196,14 +209,3 @@ SELECT
     END
 FROM
     social_med;
- /*Step 5: Blocked Account — Sperrkonto
-
-What is Sperrkonto?
-Germany wants to make sure you won’t run out of money mid-study. So they require you to lock a fixed amount in a special bank account before granting your visa.
-
-How it works:
-
-You deposit €11,904 (~NPR 17–18 lakhs) into this account
-The money is locked — you can’t touch it freely
-Once in Germany, you can withdraw only €992 per month
-The money is still yours — Germany doesn’t take it--*/
