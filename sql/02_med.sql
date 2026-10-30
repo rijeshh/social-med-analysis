@@ -28,3 +28,34 @@ FROM
     social_med  
 GROUP BY
     sleep_category;
+
+
+
+-- Correct way for that (very important pattern)
+-- Use a subquery:
+
+SELECT *
+FROM (
+    SELECT
+    month,
+    store,
+    sales,
+    SUM(sales) OVER(
+        PARTITION BY store
+        ORDER BY month
+    ) AS running_sales
+    FROM sales_data
+) t
+WHERE month IN ('Jan', 'Feb');
+
+-- // Basic filtering
+SELECT
+month,
+store,
+sales,
+SUM(sales) OVER(
+PARTITION BY store
+ORDER BY month
+) AS running_sales
+FROM sales_data
+WHERE month IN ('Jan', 'Feb');
