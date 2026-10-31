@@ -59,3 +59,28 @@ ORDER BY month
 ) AS running_sales
 FROM sales_data
 WHERE month IN ('Jan', 'Feb');
+
+
+-- // Basic filtering
+SELECT
+month,
+store,
+sales,
+SUM(sales) OVER(
+PARTITION BY store
+ORDER BY month
+) AS running_sales
+FROM sales_data
+WHERE month IN ('Jan', 'Feb');
+
+-- // Basic filtering
+SELECT
+month,
+store,
+sales,
+SUM(sales) OVER(
+PARTITION BY store
+ORDER BY month
+) AS running_sales
+FROM sales_data
+WHERE month IN ('Jan', 'Feb');
