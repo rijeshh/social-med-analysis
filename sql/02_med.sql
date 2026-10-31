@@ -61,26 +61,15 @@ FROM sales_data
 WHERE month IN ('Jan', 'Feb');
 
 
--- // Basic filtering
-SELECT
-month,
-store,
-sales,
-SUM(sales) OVER(
-PARTITION BY store
-ORDER BY month
-) AS running_sales
-FROM sales_data
-WHERE month IN ('Jan', 'Feb');
+-- ORDER BY with CASE
+-- Useful when you want custom order.
 
--- // Basic filtering
-SELECT
-month,
-store,
-sales,
-SUM(sales) OVER(
-PARTITION BY store
-ORDER BY month
-) AS running_sales
-FROM sales_data
-WHERE month IN ('Jan', 'Feb');
+
+SELECT *
+FROM employees
+ORDER BY
+CASE
+    WHEN dept = 'HR' THEN 1
+    WHEN dept = 'IT' THEN 2
+    ELSE 3
+END;
