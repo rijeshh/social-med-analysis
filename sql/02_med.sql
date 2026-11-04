@@ -87,17 +87,53 @@ ORDER BY salary DESC
 FROM employees;
 
 
--- one 
+-- Correct way for that (very important pattern)
+-- Use a subquery:
 
 
--- ORDER BY with PARTITION BY
+-- SELECT *
+-- FROM (
+--     SELECT
+--     month,
+--     store,
+--     sales,
+--     SUM(sales) OVER(
+--         PARTITION BY store
+--         ORDER BY month
+--     ) AS running_sales
+--     FROM sales_data
+-- ) t
+-- WHERE month IN ('Jan', 'Feb');
 
-SELECT
-name,
-dept,
-salary,
-ROW_NUMBER() OVER(
-PARTITION BY dept
-ORDER BY salary DESC
-) AS rank
-FROM employees;
+-- -- 5. Why this works
+-- -- Step 1 (inside query):
+
+-- -- 👉 SQL calculates running total on all months
+
+-- -- Step 2 (outer query):
+
+-- -- 👉 Then filters only Jan & Feb
+-- -- 6. Difference summary
+-- -- Approach	Behavior
+-- -- WHERE before window	ignores previous data
+-- -- WHERE after window (subquery)	keeps full history
+
+
+-- 7. Simple intuition
+-- Think like this:
+-- Query 1 (WHERE inside)
+-- 👉 "Give me Jan & Feb data, then calculate"
+-- Query 2 (subquery)
+-- 👉 "Calculate everything first, then show Jan & Feb"
+-- 8. Small tip (very practical)
+-- If your month is text like 'Jan', 'Feb', ordering may break.
+
+-- Better to use:
+-- ORDER BY 
+-- CASE 
+--   WHEN month = 'Jan' THEN 1
+--   WHEN month = 'Feb' THEN 2
+--   WHEN month = 'Mar' THEN 3
+-- END
+
+-- OR ideally use a proper date column.
