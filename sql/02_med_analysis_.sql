@@ -228,3 +228,29 @@ FROM
 -- END
 
 -- OR ideally use a proper date column.
+
+--------average sleep, average stress, and average academic performance------------
+
+SELECT
+    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
+    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
+    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
+FROM
+    social_med;
+
+
+SELECT
+    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
+    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
+    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
+FROM
+    social_med;
+
+    
+
+SELECT
+    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
+    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
+    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
+FROM
+    social_med;
