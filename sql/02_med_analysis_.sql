@@ -231,26 +231,28 @@ FROM
 
 --------average sleep, average stress, and average academic performance------------
 
+
+-- ORDER BY with CASE
+-- Useful when you want custom order.
+
+
+SELECT *
+FROM employees
+ORDER BY
+CASE
+    WHEN dept = 'HR' THEN 1
+    WHEN dept = 'IT' THEN 2
+    ELSE 3
+END;
+
+-- ORDER BY with PARTITION BY
+
 SELECT
-    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
-    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
-    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
-FROM
-    social_med;
-
-
-SELECT
-    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
-    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
-    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
-FROM
-    social_med;
-
-    
-
-SELECT
-    ROUND(AVG(sleep_hours)::numeric,2) AS avg_sleep_hours,
-    ROUND(AVG(stress_level)::numeric,2) AS avg_stress_level,
-    ROUND(AVG(academic_performance)::numeric,2) AS avg_academic_performance
-FROM
-    social_med;
+name,
+dept,
+salary,
+ROW_NUMBER() OVER(
+PARTITION BY dept
+ORDER BY salary DESC
+) AS rank
+FROM employees;
