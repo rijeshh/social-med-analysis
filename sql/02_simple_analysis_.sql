@@ -113,3 +113,27 @@ GROUP BY
 -- END
 
 -- OR ideally use a proper date column.
+
+-- ORDER BY with PARTITION BY
+
+SELECT
+name,
+dept,
+salary,
+ROW_NUMBER() OVER(
+PARTITION BY dept
+ORDER BY salary DESC
+) AS rank
+FROM employees;
+
+-- ORDER BY with PARTITION BY
+
+SELECT
+name,
+dept,
+salary,
+ROW_NUMBER() OVER(
+PARTITION BY dept
+ORDER BY salary DESC
+) AS rank
+FROM employees;

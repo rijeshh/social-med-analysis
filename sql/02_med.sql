@@ -86,6 +86,18 @@ ORDER BY salary DESC
 ) AS rank
 FROM employees;
 
+-- ORDER BY with PARTITION BY
+
+SELECT
+name,
+dept,
+salary,
+ROW_NUMBER() OVER(
+PARTITION BY dept
+ORDER BY salary DESC
+) AS rank
+FROM employees;
+
 
 -- Correct way for that (very important pattern)
 -- Use a subquery:
