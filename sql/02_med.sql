@@ -129,23 +129,18 @@ FROM employees;
 -- -- Approach	Behavior
 -- -- WHERE before window	ignores previous data
 -- -- WHERE after window (subquery)	keeps full history
-
-
--- 7. Simple intuition
--- Think like this:
--- Query 1 (WHERE inside)
--- 👉 "Give me Jan & Feb data, then calculate"
--- Query 2 (subquery)
--- 👉 "Calculate everything first, then show Jan & Feb"
--- 8. Small tip (very practical)
--- If your month is text like 'Jan', 'Feb', ordering may break.
-
--- Better to use:
--- ORDER BY 
--- CASE 
---   WHEN month = 'Jan' THEN 1
---   WHEN month = 'Feb' THEN 2
---   WHEN month = 'Mar' THEN 3
--- END
-
--- OR ideally use a proper date column.
+SELECT
+    ROLL
+FROM
+    (
+        SELECT
+            month,
+            store,
+            sales,
+            SUM(sales) OVER(
+                PARTITION BY store
+                ORDER BY month
+            ) AS running_sales
+        FROM sales_data
+    ) t
+WHERE month IN ('Jan', 'Feb');
