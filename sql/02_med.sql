@@ -196,3 +196,21 @@ FROM
         FROM sales_data
     ) t
 WHERE month IN ('Jan', 'Feb');
+
+--
+
+SELECT
+    ROLL
+FROM
+    (
+        SELECT
+            month,
+            store,
+            sales,
+            SUM(sales) OVER(
+                PARTITION BY store
+                ORDER BY month
+            ) AS running_sales
+        FROM sales_data
+    ) t
+WHERE month IN ('Jan', 'Feb');
