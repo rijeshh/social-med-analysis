@@ -264,3 +264,35 @@ WHERE month IN ('Jan', 'Feb');
 -- -- Approach	Behavior
 -- -- WHERE before window	ignores previous data
 -- -- WHERE after window (subquery)	keeps full history
+
+SELECT
+    ROLL
+FROM
+    (
+        SELECT
+            month,
+            store,
+            sales,
+            SUM(sales) OVER(
+                PARTITION BY store
+                ORDER BY month
+            ) AS running_sales
+        FROM sales_data
+    ) t
+WHERE month IN ('Jan', 'Feb');
+
+SELECT
+    ROLL
+FROM
+    (
+        SELECT
+            month,
+            store,
+            sales,
+            SUM(sales) OVER(
+                PARTITION BY store
+                ORDER BY month
+            ) AS running_sales
+        FROM sales_data
+    ) t
+WHERE month IN ('Jan', 'Feb');
