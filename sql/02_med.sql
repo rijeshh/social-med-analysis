@@ -296,3 +296,34 @@ FROM
         FROM sales_data
     ) t
 WHERE month IN ('Jan', 'Feb');
+
+-- Correct way for that (very important pattern)
+-- Use a subquery:
+
+
+-- SELECT *
+-- FROM (
+--     SELECT
+--     month,
+--     store,
+--     sales,
+--     SUM(sales) OVER(
+--         PARTITION BY store
+--         ORDER BY month
+--     ) AS running_sales
+--     FROM sales_data
+-- ) t
+-- WHERE month IN ('Jan', 'Feb');
+
+-- -- 5. Why this works
+-- -- Step 1 (inside query):
+
+-- -- 👉 SQL calculates running total on all months
+
+-- -- Step 2 (outer query):
+
+-- -- 👉 Then filters only Jan & Feb
+-- -- 6. Difference summary
+-- -- Approach	Behavior
+-- -- WHERE before window	ignores previous data
+-- -- WHERE after window (subquery)	keeps full history
